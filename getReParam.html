@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+
+<a href="direct1.html" onclick="return confirm('Are you sure you want to Remove?');">Remove</a>
+ 
+<form action="direct1.html" method="get">
+  <input type="button" onclick="ConfirmDelete()" value="Remove1">
+</form>
+
+<script type="text/javascript">
+
+function ConfirmDelete()
+{
+  var x = confirm("Are you sure you want to delete?");
+  if (x)
+      return true;
+  else
+    return false;
+}
+
+const queryString = window.location.search;
+console.log(queryString);
+// ?product=shirt&color=blue&newuser&size=m
+
+const urlParams = new URLSearchParams(queryString);
+
+const product = urlParams.get('product')
+console.log(product);
+// shirt
+
+const color = urlParams.get('color')
+console.log(color);
+// blue
+
+const newUser = urlParams.get('newUser')
+console.log(newUser);
+// empty string
+
+console.log(urlParams.has('product'));
+// true
+
+console.log(urlParams.has('paymentmethod'));
+// false
+console.log(urlParams.getAll('size'));
+// [ 'm' ]
+
+//Programmatically add a second size parameter.
+urlParams.append('size', 'xl');
+
+console.log(urlParams.getAll('size'));
+// [ 'm', 'xl' ]
+
+const
+  keys = urlParams.keys(),
+  values = urlParams.values(),
+  entries = urlParams.entries();
+
+for (const key of keys) console.log(key);
+// product, color, newuser, size
+
+for (const value of values) console.log(value);
+// shirt, blue, , m
+
+for(const entry of entries) {
+  console.log(`${entry[0]}: ${entry[1]}`);
+}
+// product: shirt
+// color: blue
+// newuser:
+// size: m
+</script>
+
+</body>
+</html>

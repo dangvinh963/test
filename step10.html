@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;            
+        }
+        div {
+            border: 1px solid orange;
+        }
+        .wrapper {
+            position: absolute;
+            left: 10%; /* rate with screen width */
+            top: 30%;
+            width: 80%;
+            height: 200px;
+            overflow: hidden;
+        }
+        .inner {
+            position: absolute;
+            top : 0;
+            left: 0;
+            height: 100%;
+            width: 200%;/* parent */
+            display: grid;/* -webkit-box*/
+            grid-template-columns: repeat(6, 1fr);
+            gap:4px;
+            pointer-events: none;
+        }
+        .item {
+            /* width */
+            height: 100%;
+            background-color: orchid;
+        }
+    </style>
+</head>
+<body>
+    <!-- 화면 왼쪽으로부터 거리(px)
+    element.offsetLeft : ~px from screen left -->
+    draggable slider 
+    <div class="wrapper">
+        <div class="inner">
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+            <div class="item">4</div>
+            <div class="item">5</div>
+            <div class="item">6</div>
+        </div>
+    </div>
+
+    <script>
+        var wrapper = document.querySelector('.wrapper');
+        var innerSlider = document.querySelector('.inner');
+        var pressed = false;// drag
+        var startx;
+        var x;
+
+        // offsetLeft : offset from parent element
+        wrapper.addEventListener('mousedown', e=>{
+            pressed = true;
+            // where grab
+            startx = e.offsetX - innerSlider.offsetLeft;
+ //           console.log(startx,  e.offsetX , innerSlider.offsetLeft);
+            // cursor is mouse pointer
+            wrapper.style.cursor = "grabbing";
+        });
+        wrapper.addEventListener('mouseup', e=>{
+            wrapper.style.cursor = "grab";
+        });
+        wrapper.addEventListener('mouseenter', e=>{
+            wrapper.style.cursor = "grab";
+        });
+        wrapper.addEventListener('mousemove', e=>{
+            if(!pressed)    return;
+            e.preventDefault();// init to read newly
+            x = e.offsetX;
+//            console.log(x);
+            // move innerSlider
+            pos = x - startx;
+            innerSlider.style.left = pos+'px';
+//            innerSlider.style.left = `${x - startx}px`;
+            // not ' '
+            checkboundary();
+        });
+        
+        window.addEventListener('mouseup', e=>{
+            pressed = false;
+        });
+
+        function checkboundary(){
+            let outer = wrapper.getBoundingClientRect();
+            let inner = innerSlider.getBoundingClientRect();
+            console.log('outer.width :', outer.width);
+            console.log('inner.width :', inner.width);
+            if( parseInt(innerSlider.style.left) > 0){
+                innerSlider.style.left='0px';
+            }else if( inner.right < outer.right){
+                let pos = (-1)*(inner.width-outer.width);
+                innerSlider.style.left = pos+'px';
+            }
+        }
+
+        
+        // window.addEventListener('mouseup', event => {
+        //     console.log('screen :', event.screenX);
+        //     console.log('offset :', event.offsetX);
+        // });
+        // var inner = document.getElementsByClassName('inner')[0];
+        // var items = document.getElementsByClassName('item');
+        // for(var i=0; i<items.length; i+=1){
+        //     console.log( items[i].offsetLeft );
+        // }
+    </script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        header, section, article, footer, aside, nav, 
+        figure, figcaption, hgroup {
+            display: block;            
+        }
+
+        /* each element style */
+        nav {
+            margin: 4px 0px;/* outside */
+        }
+        /* wrapper for content */
+        #player {
+            width: 720px;
+            margin: 20px auto;/*left,right auto to center*/
+            padding: 4px;/*inside*/
+            background-color: rgb(125, 255, 75);
+            border: 1px solid #968966;
+            border-radius: 4px;
+        }
+        #buttons {
+            width: 84px;
+            height: 20px;
+            float: left;
+        }
+        #bar {
+            position: relative;/* origin by parent element */
+            /*position: absolute;*//* origin by window */
+            float: left;
+            width: 612px;
+            height: 16px;
+            padding: 2px;
+            border: 1px dashed blue;
+            background-color: #eeccee;
+        }
+        /* HTML5 has progress */
+        #progress {
+            position: absolute;
+            width: 0px;/* before play*/
+            height: 16px;
+            /* red, strong red, pink red, wine red*/
+            background-color: rgba(12, 20, 164, 0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>VIDEO CONTROL</h1>
+    <hr>
+
+
+    <section id="player">
+        <video id="media" 
+            src="Mushoku Tensei - 01.mp4"
+            width="100%" height="auto">
+            
+        </video>
+        <nav>
+            <div id="buttons">
+                <button type="button" id="play">Play</button>
+            </div>
+            <div id="bar">
+                <div id="progress"></div>
+            </div> 
+            <div style="clear : both;">clean floating</div>
+            
+        </nav>
+
+        
+
+
+    </section>
+    <nav>
+
+    </nav>
+    <hr>
+
+    <script>
+        window.addEventListener('load', initPlayer, false);
+        function initPlayer(e) {
+            mmedia = document.querySelector('#media');
+            play = document.querySelector('#play');
+            bar = document.querySelector('#bar');
+            progress = document.querySelector('#progress');
+            play.addEventListener('click', push, false);
+            bar.addEventListener('click', move, false);
+        }
+        function push(e) {
+            mmedia.play();
+            
+        }
+
+        function move(e) {
+            
+        }
+        
+    </script>
+    
+</body>
+</html>

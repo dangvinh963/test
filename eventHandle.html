@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        
+        body {
+            text-align: center;
+        }
+
+        h1 {
+            background-color: aqua;
+            color: blueviolet;  
+        }
+
+        h2 {
+            background-color: brown;
+        }
+
+        p {
+            background-color: darksalmon;
+            margin: auto;
+            width: 50%;
+        }
+        
+        .demo {
+            color:fuchsia;
+            text-size-adjust: 50px;
+        }
+
+        label {
+            background-color: darkslateblue;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- can change id 
+        EX: id='click' -->
+    
+    <h1 id='onclick'>ONCLICK</h1>
+    <h1 id='oncontextmenu'>ONCONTEXTMENU</h1>
+    <h1 id='ondblclick'>ONDBLCLICK</h1>
+    <h1 id='onmousedown'>ONMOUSEDOWN</h1>
+    <h1 id='onmouseenter'>
+        ONMOUSEENTER
+        <p>Child of ONMOUSEENTER</p>
+    </h1>
+    <h1 id="onmouseleave">ONMOUSELEAVE</h1>
+    <h1 id="onmousemove">ONMOUSEMOVE</h1>
+    <p id='onmouseout'>ONMOUSEOUT</p>
+    <h1 id='onmouseover'>
+        ONMOUSEOVER
+        <p>Child ONMOUSEOVER</p>
+    </h1>
+    <p id='onmouseup'>ONMOUSEUP</p>
+
+    <h2 onclick="changeText(this);">EventHandle</h2>
+
+    <div class="demo" >
+        <label onclick="changeColor(this);">demo</label>
+    </div>
+    <div onclick="changeColor(this);">123</div>
+
+    <script>
+
+        // can change id
+        // EX: var h1Onclick = document.querySelector('#click');
+        var h1Onclick = document.querySelector('#onclick');
+        h1Onclick.addEventListener('click',
+            function(e) {
+                console.log(e);
+            }
+        )
+
+        var h1Oncontextmenu = document.getElementById('oncontextmenu');
+        h1Oncontextmenu.oncontextmenu = (e)=>{
+            console.log(e);
+        }
+
+        // var h1Ondblclick = document.querySelector('#ondblclick');
+        var h1Ondblclick = document.getElementById('ondblclick');
+        h1Ondblclick.addEventListener('dblclick',
+            function(e) {
+                console.log(e);
+            }
+        )
+
+        var h1Onmousedown = document.getElementById('onmousedown');
+        h1Onmousedown.onmousedown = function(e) {
+            console.log(e);
+        }
+
+        var h1Onmouseenter = document.querySelector('#onmouseenter');
+        h1Onmouseenter.addEventListener('mouseenter',
+            function(e) {
+                console.log(e);
+            }
+        );
+
+        var h1Onmouseleave = document.getElementById('onmouseleave');
+        h1Onmouseleave.onmouseleave = (e)=>{
+            console.log(e);
+        }
+    
+
+        var h1Onmousemove = document.getElementById('onmousemove');
+        h1Onmousemove.addEventListener('mousemove',
+            function(e) {
+                console.log(e);
+            }
+        )
+    
+        var h1Onmouseout = document.getElementById('onmouseout');
+        h1Onmouseout.onmouseout = (e)=>{
+            console.log(e);
+        };  
+
+        var h1Onmouseover = document.querySelector('#onmouseover');
+        h1Onmouseover.addEventListener('mouseover',
+            function(e) {
+                console.log(e);
+            }
+        )
+
+        var pOnmouseup = document.getElementById('onmouseup');
+        pOnmouseup.onmouseup = (e)=>{
+            console.log(e);
+        }
+
+
+        function changeColor(target) {
+            if (target.style.backgroundColor == 'black') {
+                target.style.backgroundColor = 'white';
+            } else {
+                target.style.backgroundColor = 'black';
+            }
+        }
+
+        function changeText(target) {
+            target.style.color == 'red';
+                
+        }
+
+        
+
+    </script>
+    
+</body>
+</html>
